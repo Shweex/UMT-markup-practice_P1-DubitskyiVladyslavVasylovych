@@ -305,16 +305,11 @@ body.menu-open {
   isolation: isolate;
   min-height: 480px;
   overflow: hidden;
-}
-
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 55% 88%;
+  background-color: var(--color-bg);
+  background-image: url('../images/hero-flowers.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 55% 88%;
 }
 
 .hero::after {
@@ -941,10 +936,7 @@ body.menu-open {
 
   .hero {
     min-height: 560px;
-  }
-
-  .hero__bg {
-    object-position: 68% center;
+    background-position: 68% center;
   }
 
   .hero__container {
@@ -1090,10 +1082,7 @@ body.menu-open {
 
   .hero {
     min-height: 669px;
-  }
-
-  .hero__bg {
-    object-position: right center;
+    background-position: right center;
   }
 
   .hero__container {
