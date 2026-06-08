@@ -11,7 +11,8 @@
 - `index.html` — розмітка
 - `css/styles.css` — стилі
 - `js/main.js` — меню, AOS
-- `images/` — зображення та `icons.svg`
+- `images/` — фото
+- `icons/` — логотипи, favicon, спрайт `icons.svg`
 
 ## Перевірка
 
