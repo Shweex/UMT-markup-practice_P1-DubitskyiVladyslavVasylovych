@@ -85,6 +85,8 @@
           <img src="icons/logo.svg" alt="Flora logo" width="74" height="36" />
         </a>
 
+        <a class="btn btn--primary header__cta-bar" href="#bestsellers">Explore Bouquets</a>
+
         <button
           type="button"
           class="header__burger"
@@ -127,25 +129,25 @@
               </li>
             </ul>
           </nav>
-          <a class="btn btn--primary header__cta" href="#bestsellers">Explore Bouquets</a>
+          <a class="btn btn--primary header__cta-menu" href="#bestsellers">Explore Bouquets</a>
         </div>
       </div>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <div class="container hero__container">
+        <div class="hero__container">
           <div class="hero__content" data-aos="fade-up">
             <h1 class="hero__title" id="hero-title">
               Brighten Your Day with Our Stunning Bouquets
             </h1>
             <div class="hero__text-group">
               <p class="hero__text">
-                We craft fresh, vibrant bouquets that bring joy to every occasion. Discover the
-                beauty of nature in every petal.
+                At Flora, we believe that every occasion deserves a beautiful bouquet. Our expertly
+                crafted arrangements are designed to bring joy and elegance to your celebrations.
               </p>
               <div class="hero__actions">
-                <a class="btn btn--primary" href="#bestsellers">Explore Bouquets</a>
+                <a class="btn btn--primary" href="#bestsellers">Explore Our Bestsellers</a>
               </div>
             </div>
           </div>
@@ -198,7 +200,11 @@
                 <p class="product-card__price">$55</p>
               </article>
             </li>
-            <li class="bestsellers__item" data-aos="fade-up" data-aos-delay="200">
+            <li
+              class="bestsellers__item bestsellers__item--hidden-mobile"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <article class="product-card">
                 <img
                   class="product-card__image"
@@ -242,51 +248,13 @@
             </ul>
             <div class="slider-nav__arrows bestsellers__arrows">
               <button type="button" class="slider-btn" aria-label="Previous bouquet">
-                <svg
-                  class="icon slider-btn__icon"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
-                    fill="#FCFCFC"
-                  />
-                  <path
-                    d="M24 0.5C36.9787 0.5 47.5 11.0213 47.5 24C47.5 36.9787 36.9787 47.5 24 47.5C11.0213 47.5 0.5 36.9787 0.5 24C0.5 11.0213 11.0213 0.5 24 0.5Z"
-                    stroke="#030C01"
-                    stroke-opacity="0.15"
-                  />
-                  <path
-                    d="M24.7071 29.293L20.4141 25H30.0001V23H20.4141L24.7071 18.707L23.2931 17.293L16.5861 24L23.2931 30.707L24.7071 29.293Z"
-                    fill="#030C01"
-                  />
+                <svg class="icon slider-btn__icon" width="48" height="48" fill="none" aria-hidden="true">
+                  <use href="#icon-slider-arrow-left"></use>
                 </svg>
               </button>
               <button type="button" class="slider-btn" aria-label="Next bouquet">
-                <svg
-                  class="icon slider-btn__icon"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
-                    fill="#FCFCFC"
-                  />
-                  <path
-                    d="M24 0.5C36.9787 0.5 47.5 11.0213 47.5 24C47.5 36.9787 36.9787 47.5 24 47.5C11.0213 47.5 0.5 36.9787 0.5 24C0.5 11.0213 11.0213 0.5 24 0.5Z"
-                    stroke="#030C01"
-                    stroke-opacity="0.15"
-                  />
-                  <path
-                    d="M23.293 29.293L24.707 30.707L31.414 24L24.707 17.293L23.293 18.707L27.586 23H18V25H27.586L23.293 29.293Z"
-                    fill="#030C01"
-                  />
+                <svg class="icon slider-btn__icon" width="48" height="48" fill="none" aria-hidden="true">
+                  <use href="#icon-slider-arrow-right"></use>
                 </svg>
               </button>
             </div>
@@ -451,7 +419,7 @@
               </blockquote>
             </li>
             <li
-              class="testimonials__item testimonials__item--hidden-mobile"
+              class="testimonials__item testimonials__item--hidden-tablet"
               data-aos="fade-up"
               data-aos-delay="300"
             >
@@ -468,51 +436,13 @@
           <div class="slider-nav testimonials__nav" aria-hidden="true">
             <div class="slider-nav__arrows testimonials__arrows">
               <button type="button" class="slider-btn" aria-label="Previous review">
-                <svg
-                  class="icon slider-btn__icon"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
-                    fill="#FCFCFC"
-                  />
-                  <path
-                    d="M24 0.5C36.9787 0.5 47.5 11.0213 47.5 24C47.5 36.9787 36.9787 47.5 24 47.5C11.0213 47.5 0.5 36.9787 0.5 24C0.5 11.0213 11.0213 0.5 24 0.5Z"
-                    stroke="#030C01"
-                    stroke-opacity="0.15"
-                  />
-                  <path
-                    d="M24.7071 29.293L20.4141 25H30.0001V23H20.4141L24.7071 18.707L23.2931 17.293L16.5861 24L23.2931 30.707L24.7071 29.293Z"
-                    fill="#030C01"
-                  />
+                <svg class="icon slider-btn__icon" width="48" height="48" fill="none" aria-hidden="true">
+                  <use href="#icon-slider-arrow-left"></use>
                 </svg>
               </button>
               <button type="button" class="slider-btn" aria-label="Next review">
-                <svg
-                  class="icon slider-btn__icon"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
-                    fill="#FCFCFC"
-                  />
-                  <path
-                    d="M24 0.5C36.9787 0.5 47.5 11.0213 47.5 24C47.5 36.9787 36.9787 47.5 24 47.5C11.0213 47.5 0.5 36.9787 0.5 24C0.5 11.0213 11.0213 0.5 24 0.5Z"
-                    stroke="#030C01"
-                    stroke-opacity="0.15"
-                  />
-                  <path
-                    d="M23.293 29.293L24.707 30.707L31.414 24L24.707 17.293L23.293 18.707L27.586 23H18V25H27.586L23.293 29.293Z"
-                    fill="#030C01"
-                  />
+                <svg class="icon slider-btn__icon" width="48" height="48" fill="none" aria-hidden="true">
+                  <use href="#icon-slider-arrow-right"></use>
                 </svg>
               </button>
             </div>
@@ -582,21 +512,21 @@
           <ul class="footer__social">
             <li>
               <a class="footer__social-link" href="#" aria-label="Facebook">
-                <svg class="icon" width="24" height="24" aria-hidden="true">
+                <svg class="icon" width="40" height="40" aria-hidden="true">
                   <use href="#icon-facebook"></use>
                 </svg>
               </a>
             </li>
             <li>
               <a class="footer__social-link" href="#" aria-label="Instagram">
-                <svg class="icon" width="24" height="24" aria-hidden="true">
+                <svg class="icon" width="40" height="40" aria-hidden="true">
                   <use href="#icon-instagram"></use>
                 </svg>
               </a>
             </li>
             <li>
               <a class="footer__social-link" href="#" aria-label="X">
-                <svg class="icon" width="24" height="24" aria-hidden="true">
+                <svg class="icon" width="40" height="40" aria-hidden="true">
                   <use href="#icon-x"></use>
                 </svg>
               </a>
