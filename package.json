@@ -1,0 +1,10 @@
+{
+  "name": "flora-markup-practice",
+  "private": true,
+  "scripts": {
+    "server": "json-server --watch db.json --port 3000"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4"
+  }
+}

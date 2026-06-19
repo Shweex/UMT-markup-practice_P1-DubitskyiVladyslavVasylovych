@@ -9,7 +9,7 @@
     />
     <title>Flora — Floral Arrangements</title>
     <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="images/hero-flowers.jpg" as="image" fetchpriority="high" />
+    <link rel="preload" href="images/retina/hero-flowers-mobile.jpg" as="image" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -76,6 +76,10 @@
     <circle cx="17.5" cy="6.5" r="1" fill="#030C01" />
   </symbol>
   <symbol id="icon-x" viewBox="0 0 24 24"><path d="M17.1761 4.24268H19.9362L13.9061 11.0201L21 20.2427H15.4456L11.0951 14.6493L6.11723 20.2427H3.35544L9.80517 12.9935L3 4.24268H8.69545L12.6279 9.3553L17.1761 4.24268ZM16.2073 18.6181H17.7368L7.86441 5.78196H6.2232L16.2073 18.6181Z" fill="#030C01"/></symbol>
+  <symbol id="icon-checkbox" viewBox="0 0 20 20">
+    <rect x="1" y="1" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M5 10.5L8.5 14L15 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
 </svg>
 
 
@@ -168,14 +172,34 @@
             </p>
           </div>
           <div class="passion__media" data-aos="fade-up">
-            <img
-              class="passion__image"
-              src="images/passion-florist.jpg"
-              alt="Florist arranging a fresh bouquet"
-              width="600"
-              height="450"
-              loading="lazy"
-            />
+            <picture>
+              <source
+                media="(min-width: 1440px)"
+                srcset="
+                  images/retina/passion-florist-desktop.jpg    1x,
+                  images/retina/passion-florist-desktop@2x.jpg 2x
+                "
+              />
+              <source
+                media="(min-width: 768px)"
+                srcset="
+                  images/retina/passion-florist-tablet.jpg    1x,
+                  images/retina/passion-florist-tablet@2x.jpg 2x
+                "
+              />
+              <img
+                class="passion__image"
+                src="images/passion-florist.jpg"
+                srcset="
+                  images/retina/passion-florist-mobile.jpg    1x,
+                  images/retina/passion-florist-mobile@2x.jpg 2x
+                "
+                alt="Florist arranging a fresh bouquet"
+                width="600"
+                height="450"
+                loading="lazy"
+              />
+            </picture>
           </div>
         </div>
       </section>
@@ -185,58 +209,8 @@
           <h2 class="section__title bestsellers__title" id="bestsellers-title" data-aos="fade-up">
             Top-Selling Bouquets
           </h2>
-          <ul class="bestsellers__list">
-            <li class="bestsellers__item" data-aos="fade-up" data-aos-delay="100">
-              <article class="product-card">
-                <img
-                  class="product-card__image"
-                  src="images/bouquet-spring-elegance-1.jpg"
-                  alt="Spring Elegance bouquet with pink and white flowers"
-                  width="300"
-                  height="375"
-                  loading="lazy"
-                />
-                <h3 class="product-card__name">Spring Elegance</h3>
-                <p class="product-card__price">$55</p>
-              </article>
-            </li>
-            <li
-              class="bestsellers__item bestsellers__item--hidden-mobile"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <article class="product-card">
-                <img
-                  class="product-card__image"
-                  src="images/bouquet-spring-elegance-2.jpg"
-                  alt="Berry Bliss bouquet with rich pink blooms"
-                  width="300"
-                  height="375"
-                  loading="lazy"
-                />
-                <h3 class="product-card__name">Berry Bliss</h3>
-                <p class="product-card__price">$30</p>
-              </article>
-            </li>
-            <li
-              class="bestsellers__item bestsellers__item--hidden-tablet"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <article class="product-card">
-                <img
-                  class="product-card__image"
-                  src="images/bouquet-spring-elegance-3.jpg"
-                  alt="Lavender Dream bouquet with soft purple flowers"
-                  width="300"
-                  height="375"
-                  loading="lazy"
-                />
-                <h3 class="product-card__name">Lavender Dream</h3>
-                <p class="product-card__price">$35</p>
-              </article>
-            </li>
-          </ul>
+          <p class="bestsellers__status visually-hidden" aria-live="polite">Loading bestsellers...</p>
+          <ul class="bestsellers__list"></ul>
           <div class="slider-nav bestsellers__nav" aria-hidden="true">
             <ul class="slider-nav__dots bestsellers__dots">
               <li><span class="slider-nav__dot bestsellers__dot bestsellers__dot--active"></span></li>
@@ -270,121 +244,10 @@
               Explore our stunning collection of fresh flower bouquets.
             </p>
           </div>
-          <ul class="catalog__list">
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-peach-meadow.jpg"
-                  alt="Floral Melody bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Floral Melody</h3>
-                <p class="catalog-card__price">$35</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-blush-romance.jpg"
-                  alt="Blush Romance bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Blush Romance</h3>
-                <p class="catalog-card__price">$40</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-pastel-garden.jpg"
-                  alt="Pastel Garden bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Pastel Garden</h3>
-                <p class="catalog-card__price">$38</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-tulip-charm.jpg"
-                  alt="Tulip Charm bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Tulip Charm</h3>
-                <p class="catalog-card__price">$36</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-berry-bloom.jpg"
-                  alt="Berry Bloom bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Berry Bloom</h3>
-                <p class="catalog-card__price">$48</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-sweet-whisper.jpg"
-                  alt="Sweet Whisper bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Sweet Whisper</h3>
-                <p class="catalog-card__price">$44</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-field-joy.jpg"
-                  alt="Field Joy bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Field Joy</h3>
-                <p class="catalog-card__price">$39</p>
-              </article>
-            </li>
-            <li class="catalog__item" data-aos="fade-up">
-              <article class="catalog-card">
-                <img
-                  class="catalog-card__image"
-                  src="images/bouquet-soft-bloom.jpg"
-                  alt="Soft Bloom bouquet"
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                />
-                <h3 class="catalog-card__name">Soft Bloom</h3>
-                <p class="catalog-card__price">$52</p>
-              </article>
-            </li>
-          </ul>
-          <button type="button" class="btn btn--primary catalog__more">Shop Now</button>
+          <p class="catalog__status visually-hidden" aria-live="polite">Loading bouquets...</p>
+          <p class="catalog__empty" hidden>No bouquets match your search.</p>
+          <ul class="catalog__list"></ul>
+          <button type="button" class="btn btn--primary catalog__more">Load more</button>
         </div>
       </section>
 
@@ -393,46 +256,8 @@
           <h2 class="section__title" id="testimonials-title" data-aos="fade-up">
             What our clients says
           </h2>
-          <ul class="testimonials__list">
-            <li class="testimonials__item" data-aos="fade-up" data-aos-delay="100">
-              <blockquote class="testimonial-card">
-                <p class="testimonial-card__text">
-                  “Flora made my anniversary unforgettable with their beautiful arrangement!”
-                </p>
-                <footer class="testimonial-card__author">
-                  <cite class="testimonial-card__name">Emma T.</cite>
-                </footer>
-              </blockquote>
-            </li>
-            <li
-              class="testimonials__item testimonials__item--hidden-mobile"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <blockquote class="testimonial-card">
-                <p class="testimonial-card__text">
-                  “Every delivery feels personal. The bouquets are fresh, balanced, and stunning.”
-                </p>
-                <footer class="testimonial-card__author">
-                  <cite class="testimonial-card__name">Maria K.</cite>
-                </footer>
-              </blockquote>
-            </li>
-            <li
-              class="testimonials__item testimonials__item--hidden-tablet"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <blockquote class="testimonial-card">
-                <p class="testimonial-card__text">
-                  “Our event florals were elegant and on time. Highly recommend Flora.”
-                </p>
-                <footer class="testimonial-card__author">
-                  <cite class="testimonial-card__name">Olena M.</cite>
-                </footer>
-              </blockquote>
-            </li>
-          </ul>
+          <p class="testimonials__status visually-hidden" aria-live="polite">Loading reviews...</p>
+          <ul class="testimonials__list"></ul>
           <div class="slider-nav testimonials__nav" aria-hidden="true">
             <div class="slider-nav__arrows testimonials__arrows">
               <button type="button" class="slider-btn" aria-label="Previous review">
@@ -483,15 +308,35 @@
               </li>
             </ul>
           </div>
-          <img
-            class="contact__photo"
-            src="images/contact-photo.jpg"
-            alt="Florist holding beautiful flowers in a flower shop"
-            width="1280"
-            height="720"
-            loading="lazy"
-            data-aos="fade-up"
-          />
+          <picture>
+            <source
+              media="(min-width: 1440px)"
+              srcset="
+                images/retina/contact-photo-desktop.jpg    1x,
+                images/retina/contact-photo-desktop@2x.jpg 2x
+              "
+            />
+            <source
+              media="(min-width: 768px)"
+              srcset="
+                images/retina/contact-photo-tablet.jpg    1x,
+                images/retina/contact-photo-tablet@2x.jpg 2x
+              "
+            />
+            <img
+              class="contact__photo"
+              src="images/contact-photo.jpg"
+              srcset="
+                images/retina/contact-photo-mobile.jpg    1x,
+                images/retina/contact-photo-mobile@2x.jpg 2x
+              "
+              alt="Florist holding beautiful flowers in a flower shop"
+              width="1280"
+              height="720"
+              loading="lazy"
+              data-aos="fade-up"
+            />
+          </picture>
         </div>
       </section>
     </main>
@@ -540,7 +385,112 @@
       </div>
     </footer>
 
+    <div class="modal product-modal" id="product-modal" data-modal aria-hidden="true">
+      <div class="modal__backdrop"></div>
+      <div
+        class="modal__dialog product-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="product-modal-title"
+      >
+        <button type="button" class="modal__close" aria-label="Close product details">
+          <svg class="icon" width="48" height="48" aria-hidden="true">
+            <use href="#icon-close"></use>
+          </svg>
+        </button>
+        <div class="product-modal__content"></div>
+      </div>
+    </div>
+
+    <div class="modal order-modal" id="order-modal" data-modal aria-hidden="true">
+      <div class="modal__backdrop"></div>
+      <div class="modal__dialog order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+        <button type="button" class="modal__close" aria-label="Close order form">
+          <svg class="icon" width="48" height="48" aria-hidden="true">
+            <use href="#icon-close"></use>
+          </svg>
+        </button>
+        <h2 class="order-modal__title" id="order-modal-title">Order</h2>
+        <form class="order-modal__form" action="#" method="post" novalidate>
+          <div class="form-field">
+            <label class="form-field__label" for="order-name">Name*</label>
+            <input
+              class="form-field__input"
+              type="text"
+              id="order-name"
+              name="order-name"
+              placeholder="Ann"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label class="form-field__label" for="order-phone">Phone*</label>
+            <input
+              class="form-field__input"
+              type="tel"
+              id="order-phone"
+              name="order-phone"
+              placeholder="+1 (555) 123-4567"
+              autocomplete="tel"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label class="form-field__label" for="order-address">Adress*</label>
+            <input
+              class="form-field__input"
+              type="text"
+              id="order-address"
+              name="order-address"
+              placeholder="456 Floral Ave, Sydney NSW 2000 AU"
+              autocomplete="street-address"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <label class="form-field__label" for="order-message">Message</label>
+            <textarea
+              class="form-field__textarea"
+              id="order-message"
+              name="order-message"
+              placeholder="Type your message..."
+              rows="4"
+            ></textarea>
+          </div>
+          <label class="checkbox order-modal__terms">
+            <input
+              class="checkbox__input visually-hidden"
+              type="checkbox"
+              id="order-terms"
+              name="order-terms"
+              required
+            />
+            <span class="checkbox__box" aria-hidden="true">
+              <svg class="icon checkbox__icon" width="20" height="20">
+                <use href="#icon-checkbox"></use>
+              </svg>
+            </span>
+            <span class="checkbox__text">I agree to the license agreement</span>
+          </label>
+          <button class="btn btn--primary order-modal__submit" type="submit">Go to Checkout</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/product-modal.js"></script>
+    <script src="js/bestsellers.js"></script>
+    <script src="js/testimonials.js"></script>
+    <script src="js/catalog.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
