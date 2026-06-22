@@ -124,26 +124,98 @@ window.FloraAPI = (function () {
     return fetchFromDbJson(resource, params);
   }
 
+  async function findLocalItem(resource, id) {
+    const db = await getLocalDb();
+    return (db[resource] || []).find(function (entry) {
+      return String(entry.id) === String(id);
+    });
+  }
+
+  async function enrichProduct(item, resource, id) {
+    if (!item) return item;
+
+    if (item.description) return item;
+
+    const db = await getLocalDb();
+    const sameCollection = (db[resource] || []).find(function (entry) {
+      return String(entry.id) === String(id);
+    });
+
+    if (sameCollection && sameCollection.description) {
+      return Object.assign({}, item, { description: sameCollection.description });
+    }
+
+    const bouquetMatch = (db.bouquets || []).find(function (entry) {
+      return String(entry.id) === String(id) || (item.name && entry.name === item.name);
+    });
+
+    if (bouquetMatch && bouquetMatch.description) {
+      return Object.assign({}, item, { description: bouquetMatch.description });
+    }
+
+    const bestsellerMatch = (db.bestsellers || []).find(function (entry) {
+      return String(entry.id) === String(id) || (item.name && entry.name === item.name);
+    });
+
+    if (bestsellerMatch && bestsellerMatch.description) {
+      return Object.assign({}, item, { description: bestsellerMatch.description });
+    }
+
+    return item;
+  }
+
   async function fetchItem(resource, id) {
+    let item = null;
+
     if (await checkServer()) {
       try {
         const response = await getHttp().get(API_BASE + '/' + resource + '/' + id, {
           timeout: 3000,
         });
-        return response.data;
+        item = response.data;
       } catch (error) {
         console.warn('json-server request failed, using local data', error);
       }
     }
 
-    const db = await getLocalDb();
-    const item = (db[resource] || []).find(function (entry) {
-      return String(entry.id) === String(id);
-    });
+    if (!item) {
+      item = await findLocalItem(resource, id);
+    }
 
     if (!item) throw new Error('Item not found');
-    return item;
+    return enrichProduct(item, resource, id);
   }
 
-  return { fetchCollection: fetchCollection, fetchItem: fetchItem };
+  async function createItem(resource, payload) {
+    if (await checkServer()) {
+      try {
+        const response = await getHttp().post(API_BASE + '/' + resource, payload, {
+          timeout: 3000,
+        });
+        return response.data;
+      } catch (error) {
+        console.warn('json-server POST failed, using local data', error);
+      }
+    }
+
+    const db = await getLocalDb();
+    const items = db[resource] || [];
+    const nextId =
+      items.reduce(function (max, entry) {
+        return Math.max(max, Number(entry.id) || 0);
+      }, 0) + 1;
+    const newItem = Object.assign({}, payload, { id: nextId });
+
+    items.push(newItem);
+    db[resource] = items;
+    localDb = db;
+
+    return newItem;
+  }
+
+  return {
+    fetchCollection: fetchCollection,
+    fetchItem: fetchItem,
+    createItem: createItem,
+  };
 })();

@@ -1,4 +1,13 @@
 window.FloraTemplates = (function () {
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function imageSrcset(imagePath) {
     const base = imagePath.replace(/\.jpg$/, '');
     return imagePath + ' 1x, ' + base + '@2x.jpg 2x';
@@ -22,24 +31,24 @@ window.FloraTemplates = (function () {
         return (
           '<li class="bestsellers__item' +
           hiddenBestsellerClass(index) +
-          '" data-aos="fade-up" data-aos-delay="' +
+          '" data-product-id="' +
+          item.id +
+          '" data-product-type="bestsellers" data-aos="fade-up" data-aos-delay="' +
           (index + 1) * 100 +
           '">' +
-          '<article class="product-card" data-product-id="' +
-          item.id +
-          '" data-product-type="bestsellers" tabindex="0" role="button">' +
+          '<article class="product-card">' +
           '<img class="product-card__image" src="' +
-          item.image +
+          escapeHtml(item.image) +
           '" srcset="' +
           imageSrcset(item.image) +
           '" alt="' +
-          item.alt +
+          escapeHtml(item.alt) +
           '" width="300" height="375" loading="lazy" />' +
           '<h3 class="product-card__name">' +
-          item.name +
+          escapeHtml(item.name) +
           '</h3>' +
           '<p class="product-card__price">$' +
-          item.price +
+          escapeHtml(item.price) +
           '</p>' +
           '</article></li>'
         );
@@ -51,24 +60,24 @@ window.FloraTemplates = (function () {
     return items
       .map(function (item, index) {
         return (
-          '<li class="catalog__item" data-aos="fade-up" data-aos-delay="' +
+          '<li class="catalog__item" data-product-id="' +
+          item.id +
+          '" data-product-type="bouquets" data-aos="fade-up" data-aos-delay="' +
           index * 50 +
           '">' +
-          '<article class="catalog-card" data-product-id="' +
-          item.id +
-          '" data-product-type="bouquets" tabindex="0" role="button">' +
+          '<article class="catalog-card">' +
           '<img class="catalog-card__image" src="' +
-          item.image +
+          escapeHtml(item.image) +
           '" srcset="' +
           imageSrcset(item.image) +
           '" alt="' +
-          item.alt +
+          escapeHtml(item.alt) +
           '" width="300" height="300" loading="lazy" />' +
           '<h3 class="catalog-card__name">' +
-          item.name +
+          escapeHtml(item.name) +
           '</h3>' +
           '<p class="catalog-card__price">$' +
-          item.price +
+          escapeHtml(item.price) +
           '</p>' +
           '</article></li>'
         );
@@ -87,11 +96,11 @@ window.FloraTemplates = (function () {
           '">' +
           '<blockquote class="testimonial-card">' +
           '<p class="testimonial-card__text">"' +
-          item.text +
+          escapeHtml(item.text) +
           '"</p>' +
           '<footer class="testimonial-card__author">' +
           '<cite class="testimonial-card__name">' +
-          item.author +
+          escapeHtml(item.author) +
           '</cite></footer></blockquote></li>'
         );
       })
@@ -99,23 +108,27 @@ window.FloraTemplates = (function () {
   }
 
   function renderProductModalContent(product) {
+    const description =
+      product.description ||
+      'Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring.';
+
     return (
       '<img class="product-modal__image" src="' +
-      product.image +
+      escapeHtml(product.image) +
       '" srcset="' +
       imageSrcset(product.image) +
       '" alt="' +
-      product.alt +
+      escapeHtml(product.alt) +
       '" width="400" height="400" />' +
       '<div class="product-modal__body">' +
       '<h2 class="product-modal__title" id="product-modal-title">' +
-      product.name +
+      escapeHtml(product.name) +
       '</h2>' +
       '<p class="product-modal__price">$' +
-      product.price +
+      escapeHtml(product.price) +
       '</p>' +
       '<p class="product-modal__description">' +
-      product.description +
+      escapeHtml(description) +
       '</p>' +
       '<div class="product-modal__actions">' +
       '<button type="button" class="btn btn--primary product-modal__buy">Buy now</button>' +

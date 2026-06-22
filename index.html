@@ -216,9 +216,6 @@
               <li><span class="slider-nav__dot bestsellers__dot bestsellers__dot--active"></span></li>
               <li><span class="slider-nav__dot bestsellers__dot"></span></li>
               <li><span class="slider-nav__dot bestsellers__dot"></span></li>
-              <li><span class="slider-nav__dot bestsellers__dot"></span></li>
-              <li><span class="slider-nav__dot bestsellers__dot"></span></li>
-              <li><span class="slider-nav__dot bestsellers__dot"></span></li>
             </ul>
             <div class="slider-nav__arrows bestsellers__arrows">
               <button type="button" class="slider-btn" aria-label="Previous bouquet">
@@ -258,6 +255,34 @@
           </h2>
           <p class="testimonials__status visually-hidden" aria-live="polite">Loading reviews...</p>
           <ul class="testimonials__list"></ul>
+          <form class="testimonials__form" action="#" method="post" novalidate>
+            <h3 class="testimonials__form-title">Leave your feedback</h3>
+            <div class="form-field">
+              <label class="form-field__label" for="feedback-author">Name*</label>
+              <input
+                class="form-field__input"
+                type="text"
+                id="feedback-author"
+                name="feedback-author"
+                placeholder="Ann"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="feedback-text">Your review*</label>
+              <textarea
+                class="form-field__textarea"
+                id="feedback-text"
+                name="feedback-text"
+                placeholder="Share your experience with Flora..."
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <p class="testimonials__form-status" aria-live="polite"></p>
+            <button class="btn btn--primary testimonials__form-submit" type="submit">Send review</button>
+          </form>
           <div class="slider-nav testimonials__nav" aria-hidden="true">
             <div class="slider-nav__arrows testimonials__arrows">
               <button type="button" class="slider-btn" aria-label="Previous review">

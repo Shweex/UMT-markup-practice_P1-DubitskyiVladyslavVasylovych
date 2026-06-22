@@ -30,20 +30,24 @@ window.FloraProductModal = (function () {
   }
 
   function bindProductCards(container) {
-    container.querySelectorAll('[data-product-id]').forEach(function (card) {
-      if (card.dataset.bound) return;
-      card.dataset.bound = 'true';
+    if (!container || container.dataset.cardsBound) return;
+    container.dataset.cardsBound = 'true';
 
-      card.addEventListener('click', function () {
-        openProductModal(card.dataset.productType, card.dataset.productId);
-      });
+    container.addEventListener('click', function (event) {
+      const card = event.target.closest('[data-product-id]');
+      if (!card || !container.contains(card)) return;
 
-      card.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          openProductModal(card.dataset.productType, card.dataset.productId);
-        }
-      });
+      openProductModal(card.dataset.productType, card.dataset.productId);
+    });
+
+    container.addEventListener('keydown', function (event) {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+
+      const card = event.target.closest('[data-product-id]');
+      if (!card || !container.contains(card)) return;
+
+      event.preventDefault();
+      openProductModal(card.dataset.productType, card.dataset.productId);
     });
   }
 

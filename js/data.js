@@ -14,7 +14,7 @@ window.FloraDB = {
       "price": 30,
       "image": "images/bouquet-spring-elegance-2.jpg",
       "alt": "Berry Bliss bouquet with rich pink blooms",
-      "description": "A vibrant mix of berry-toned blooms crafted to delight. Perfect for expressing affection with bold color and soft fragrance."
+      "description": "A vibrant mix of berry-toned blooms crafted to delight. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring. Perfect for expressing affection with bold color and soft fragrance."
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@ window.FloraDB = {
       "price": 35,
       "image": "images/bouquet-spring-elegance-3.jpg",
       "alt": "Lavender Dream bouquet with soft purple flowers",
-      "description": "Soft lavender hues and delicate petals create a calming, romantic arrangement for any thoughtful occasion."
+      "description": "Soft lavender hues and delicate petals create a calming, romantic arrangement for any thoughtful occasion. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this bouquet brings warm smiles and lasting impressions."
     }
   ],
   "bouquets": [
@@ -32,7 +32,7 @@ window.FloraDB = {
       "price": 35,
       "image": "images/bouquet-peach-meadow.jpg",
       "alt": "Floral Melody bouquet",
-      "description": "Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
+      "description": "Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this arrangement is sure to bring warm smiles and lasting impressions."
     },
     {
       "id": 2,
@@ -40,7 +40,7 @@ window.FloraDB = {
       "price": 40,
       "image": "images/bouquet-blush-romance.jpg",
       "alt": "Blush Romance bouquet",
-      "description": "Romantic blush petals arranged with care for heartfelt moments and special celebrations."
+      "description": "Romantic blush petals arranged with care for heartfelt moments and special celebrations. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
     },
     {
       "id": 3,
@@ -48,7 +48,7 @@ window.FloraDB = {
       "price": 38,
       "image": "images/bouquet-pastel-garden.jpg",
       "alt": "Pastel Garden bouquet",
-      "description": "A garden-inspired palette of pastel blooms that brings warmth and charm to any room."
+      "description": "A garden-inspired palette of pastel blooms that brings warmth and charm to any room. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this arrangement is sure to bring warm smiles and lasting impressions."
     },
     {
       "id": 4,
@@ -56,7 +56,7 @@ window.FloraDB = {
       "price": 36,
       "image": "images/bouquet-tulip-charm.jpg",
       "alt": "Tulip Charm bouquet",
-      "description": "Charming tulips in soft tones — a cheerful arrangement perfect for spring greetings."
+      "description": "Charming tulips in soft tones make a cheerful arrangement perfect for spring greetings. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
     },
     {
       "id": 5,
@@ -64,7 +64,7 @@ window.FloraDB = {
       "price": 48,
       "image": "images/bouquet-berry-bloom.jpg",
       "alt": "Berry Bloom bouquet",
-      "description": "Rich berry hues and lush textures make this bouquet a striking centerpiece."
+      "description": "Rich berry hues and lush textures make this bouquet a striking centerpiece. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this arrangement is sure to bring warm smiles and lasting impressions."
     },
     {
       "id": 6,
@@ -72,7 +72,7 @@ window.FloraDB = {
       "price": 44,
       "image": "images/bouquet-sweet-whisper.jpg",
       "alt": "Sweet Whisper bouquet",
-      "description": "Delicate blooms whisper sweetness — ideal for gentle gestures and quiet celebrations."
+      "description": "Delicate blooms whisper sweetness and are ideal for gentle gestures and quiet celebrations. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
     },
     {
       "id": 7,
@@ -80,7 +80,7 @@ window.FloraDB = {
       "price": 39,
       "image": "images/bouquet-field-joy.jpg",
       "alt": "Field Joy bouquet",
-      "description": "Wildflower spirit captured in a joyful arrangement full of natural beauty."
+      "description": "Wildflower spirit captured in a joyful arrangement full of natural beauty. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this bouquet brings warm smiles and lasting impressions."
     },
     {
       "id": 8,
@@ -88,7 +88,7 @@ window.FloraDB = {
       "price": 52,
       "image": "images/bouquet-soft-bloom.jpg",
       "alt": "Soft Bloom bouquet",
-      "description": "Soft pastel petals and fresh greenery for an effortlessly elegant look."
+      "description": "Soft pastel petals and fresh greenery create an effortlessly elegant look. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
     },
     {
       "id": 9,
@@ -96,7 +96,7 @@ window.FloraDB = {
       "price": 55,
       "image": "images/bouquet-spring-elegance-1.jpg",
       "alt": "Spring Elegance bouquet",
-      "description": "A signature spring arrangement with refined elegance and lasting freshness."
+      "description": "Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this arrangement is sure to bring warm smiles and lasting impressions."
     },
     {
       "id": 10,
@@ -104,7 +104,7 @@ window.FloraDB = {
       "price": 30,
       "image": "images/bouquet-spring-elegance-2.jpg",
       "alt": "Berry Bliss bouquet",
-      "description": "Vibrant berry-toned blooms crafted to delight with bold color and fragrance."
+      "description": "A vibrant mix of berry-toned blooms crafted to delight. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring. Perfect for expressing affection with bold color and soft fragrance."
     },
     {
       "id": 11,
@@ -112,7 +112,7 @@ window.FloraDB = {
       "price": 35,
       "image": "images/bouquet-spring-elegance-3.jpg",
       "alt": "Lavender Dream bouquet",
-      "description": "Soft lavender hues create a calming, romantic arrangement for any occasion."
+      "description": "Soft lavender hues and delicate petals create a calming, romantic arrangement for any thoughtful occasion. Whether you're celebrating a birthday, sending love, or simply brightening someone's day, this bouquet brings warm smiles and lasting impressions."
     },
     {
       "id": 12,
@@ -120,7 +120,7 @@ window.FloraDB = {
       "price": 42,
       "image": "images/bouquet-peach-meadow.jpg",
       "alt": "Peach Meadow bouquet",
-      "description": "Warm peach tones and meadow-inspired greenery for a sunlit floral mood."
+      "description": "Warm peach tones and meadow-inspired greenery create a sunlit floral mood. Each stem is carefully selected to create a bouquet that radiates freshness, elegance, and the gentle charm of spring."
     }
   ],
   "testimonials": [
