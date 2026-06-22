@@ -37,7 +37,7 @@ window.FloraTestimonials = {
   },
 
   handleSubmit: async function (event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     const form = this.form;
     const formStatus = this.formStatus;
@@ -45,7 +45,7 @@ window.FloraTestimonials = {
 
     const authorInput = form.querySelector('[name="feedback-author"]');
     const textInput = form.querySelector('[name="feedback-text"]');
-    const submitBtn = form.querySelector('[type="submit"]');
+    const submitBtn = form.querySelector('.testimonials__form-submit');
     const author = authorInput ? authorInput.value.trim() : '';
     const text = textInput ? textInput.value.trim() : '';
 
@@ -72,7 +72,7 @@ window.FloraTestimonials = {
     } catch (error) {
       console.error(error);
       if (formStatus) {
-        formStatus.textContent = 'Unable to send review. Start json-server and try again.';
+        formStatus.textContent = 'Unable to send review. Please try again.';
         formStatus.classList.add('is-error');
       }
     } finally {
@@ -86,10 +86,17 @@ window.FloraTestimonials = {
     this.form = document.querySelector('.testimonials__form');
     this.formStatus = document.querySelector('.testimonials__form-status');
 
-    this.load();
-
     if (this.form) {
-      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+      this.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+      });
+
+      const submitBtn = this.form.querySelector('.testimonials__form-submit');
+      if (submitBtn) {
+        submitBtn.addEventListener('click', this.handleSubmit.bind(this));
+      }
     }
+
+    this.load();
   },
 };
