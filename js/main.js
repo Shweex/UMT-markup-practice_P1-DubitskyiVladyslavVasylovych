@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   FloraForms.initForms();
 
   FloraBestsellers.load();
-  FloraTestimonials.init();
+  FloraTestimonials.load();
   FloraCatalog.init();
 
   if (typeof AOS !== 'undefined') {

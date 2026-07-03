@@ -186,36 +186,8 @@ window.FloraAPI = (function () {
     return enrichProduct(item, resource, id);
   }
 
-  async function createItem(resource, payload) {
-    if (await checkServer()) {
-      try {
-        const response = await getHttp().post(API_BASE + '/' + resource, payload, {
-          timeout: 3000,
-        });
-        return response.data;
-      } catch (error) {
-        console.warn('json-server POST failed, using local data', error);
-      }
-    }
-
-    const db = await getLocalDb();
-    const items = db[resource] || [];
-    const nextId =
-      items.reduce(function (max, entry) {
-        return Math.max(max, Number(entry.id) || 0);
-      }, 0) + 1;
-    const newItem = Object.assign({}, payload, { id: nextId });
-
-    items.push(newItem);
-    db[resource] = items;
-    localDb = db;
-
-    return newItem;
-  }
-
   return {
     fetchCollection: fetchCollection,
     fetchItem: fetchItem,
-    createItem: createItem,
   };
 })();
