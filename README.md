@@ -21,23 +21,23 @@
 
 Відкрийте `index.html` через локальний сервер (наприклад, Live Server у VS Code).
 
-### 2. API (json-server)
+### 2. API (production backend)
 
-Динамічні списки, пагінація та пошук працюють через json-server:
+Каталог і топ-букети завантажуються з Render API:
+
+**https://flora-api-qtqi.onrender.com/api/bouquets**
+
+Відгуки (testimonials) — з локального `db.json` / `js/data.js`.
+
+**Backend repo:** https://github.com/Shweex/UMT-markup-practice_P1-DubitskyiVladyslavVasylovych-back  
+**Swagger:** https://flora-api-qtqi.onrender.com/api-docs
+
+### 3. Локальний json-server (опційно)
 
 ```bash
 npm install
 npm run server
 ```
-
-Сервер запуститься на `http://localhost:3000`. Після цього відкрийте сайт — axios завантажить дані з API.
-
-**Приклади запитів:**
-
-- `GET /bouquets?_page=1&_limit=4`
-- `GET /bouquets?q=spring&_page=1&_limit=4`
-- `GET /bestsellers`
-- `GET /testimonials`
 
 ### 3. Ретина-зображення
 

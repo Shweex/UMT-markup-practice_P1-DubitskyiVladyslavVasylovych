@@ -9,8 +9,14 @@ window.FloraTemplates = (function () {
   }
 
   function imageSrcset(imagePath) {
+    if (!imagePath || /^https?:\/\//i.test(imagePath)) return '';
     const base = imagePath.replace(/\.jpg$/, '');
     return imagePath + ' 1x, ' + base + '@2x.jpg 2x';
+  }
+
+  function imageSrcsetAttr(imagePath) {
+    const srcset = imageSrcset(imagePath);
+    return srcset ? ' srcset="' + srcset + '"' : '';
   }
 
   function hiddenBestsellerClass(index) {
@@ -39,9 +45,9 @@ window.FloraTemplates = (function () {
           '<article class="product-card">' +
           '<img class="product-card__image" src="' +
           escapeHtml(item.image) +
-          '" srcset="' +
-          imageSrcset(item.image) +
-          '" alt="' +
+          '"' +
+          imageSrcsetAttr(item.image) +
+          ' alt="' +
           escapeHtml(item.alt) +
           '" width="300" height="375" loading="lazy" />' +
           '<h3 class="product-card__name">' +
@@ -68,9 +74,9 @@ window.FloraTemplates = (function () {
           '<article class="catalog-card">' +
           '<img class="catalog-card__image" src="' +
           escapeHtml(item.image) +
-          '" srcset="' +
-          imageSrcset(item.image) +
-          '" alt="' +
+          '"' +
+          imageSrcsetAttr(item.image) +
+          ' alt="' +
           escapeHtml(item.alt) +
           '" width="300" height="300" loading="lazy" />' +
           '<h3 class="catalog-card__name">' +
@@ -115,9 +121,9 @@ window.FloraTemplates = (function () {
     return (
       '<img class="product-modal__image" src="' +
       escapeHtml(product.image) +
-      '" srcset="' +
-      imageSrcset(product.image) +
-      '" alt="' +
+      '"' +
+      imageSrcsetAttr(product.image) +
+      ' alt="' +
       escapeHtml(product.alt) +
       '" width="400" height="400" />' +
       '<div class="product-modal__body">' +

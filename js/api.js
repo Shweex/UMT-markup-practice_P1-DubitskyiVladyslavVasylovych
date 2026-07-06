@@ -1,14 +1,26 @@
 window.FloraAPI = (function () {
-  const API_BASE = 'http://localhost:3000';
-  const IS_LOCAL =
-    window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const BOUQUETS_API = 'https://flora-api-qtqi.onrender.com/api/bouquets';
   const DB_URL = new URL('db.json', window.location.href).href;
 
   let localDb = null;
-  let serverAvailable = null;
+  let bouquetsCache = null;
 
   function getHttp() {
     return window.axios;
+  }
+
+  function mapBouquet(item) {
+    return {
+      id: item.id,
+      name: item.title,
+      title: item.title,
+      description: item.description || '',
+      price: Number(item.price),
+      image: item.photoURL,
+      photoURL: item.photoURL,
+      alt: (item.title || 'Bouquet') + ' bouquet',
+      favorite: Boolean(item.favorite),
+    };
   }
 
   async function getLocalDb() {
@@ -42,24 +54,18 @@ window.FloraAPI = (function () {
       return localDb;
     }
 
-    throw new Error('No data source available. Use Live Server or run json-server.');
+    throw new Error('No local data source available.');
   }
 
-  async function checkServer() {
-    if (!IS_LOCAL || !getHttp()) return false;
-    if (serverAvailable !== null) return serverAvailable;
+  async function fetchBouquetsFromApi() {
+    if (bouquetsCache) return bouquetsCache;
 
-    try {
-      await getHttp().get(API_BASE + '/bestsellers', {
-        params: { _limit: 1 },
-        timeout: 800,
-      });
-      serverAvailable = true;
-    } catch (error) {
-      serverAvailable = false;
-    }
+    const http = getHttp();
+    if (!http) throw new Error('axios is not loaded');
 
-    return serverAvailable;
+    const response = await http.get(BOUQUETS_API, { timeout: 20000 });
+    bouquetsCache = response.data.map(mapBouquet);
+    return bouquetsCache;
   }
 
   function filterLocalItems(items, query) {
@@ -67,7 +73,7 @@ window.FloraAPI = (function () {
 
     const normalized = query.toLowerCase();
     return items.filter(function (item) {
-      const haystack = [item.name, item.text, item.author, item.alt]
+      const haystack = [item.name, item.title, item.text, item.author, item.alt]
         .filter(Boolean)
         .join(' ')
         .toLowerCase();
@@ -75,10 +81,11 @@ window.FloraAPI = (function () {
     });
   }
 
-  function paginateLocalItems(items, params) {
+  function paginateItems(items, params) {
     const page = Number(params._page) || 1;
-    const limit = Number(params._limit) > 0 ? Number(params._limit) : 8;
+    const limit = Number(params._limit) > 0 ? Number(params._limit) : items.length;
     const start = (page - 1) * limit;
+
     return {
       data: items.slice(start, start + limit),
       total: items.length,
@@ -88,40 +95,7 @@ window.FloraAPI = (function () {
   async function fetchFromDbJson(resource, params) {
     const db = await getLocalDb();
     const items = filterLocalItems(db[resource] || [], params.q);
-    return paginateLocalItems(items, params);
-  }
-
-  async function fetchFromServer(resource, params) {
-    const http = getHttp();
-    const response = await http.get(API_BASE + '/' + resource, {
-      params: params,
-      timeout: 3000,
-    });
-    const limit = Number(params._limit) > 0 ? Number(params._limit) : 0;
-    const page = Number(params._page) || 1;
-    const total = Number(response.headers['x-total-count'] || response.data.length);
-    let data = response.data;
-
-    if (limit > 0 && data.length > limit) {
-      const start = (page - 1) * limit;
-      data = data.slice(start, start + limit);
-    }
-
-    return { data: data, total: total };
-  }
-
-  async function fetchCollection(resource, params) {
-    params = params || {};
-
-    if (await checkServer()) {
-      try {
-        return await fetchFromServer(resource, params);
-      } catch (error) {
-        console.warn('json-server request failed, using local data', error);
-      }
-    }
-
-    return fetchFromDbJson(resource, params);
+    return paginateItems(items, params);
   }
 
   async function findLocalItem(resource, id) {
@@ -131,59 +105,57 @@ window.FloraAPI = (function () {
     });
   }
 
-  async function enrichProduct(item, resource, id) {
-    if (!item) return item;
+  async function fetchCollection(resource, params) {
+    params = params || {};
 
-    if (item.description) return item;
-
-    const db = await getLocalDb();
-    const sameCollection = (db[resource] || []).find(function (entry) {
-      return String(entry.id) === String(id);
-    });
-
-    if (sameCollection && sameCollection.description) {
-      return Object.assign({}, item, { description: sameCollection.description });
-    }
-
-    const bouquetMatch = (db.bouquets || []).find(function (entry) {
-      return String(entry.id) === String(id) || (item.name && entry.name === item.name);
-    });
-
-    if (bouquetMatch && bouquetMatch.description) {
-      return Object.assign({}, item, { description: bouquetMatch.description });
-    }
-
-    const bestsellerMatch = (db.bestsellers || []).find(function (entry) {
-      return String(entry.id) === String(id) || (item.name && entry.name === item.name);
-    });
-
-    if (bestsellerMatch && bestsellerMatch.description) {
-      return Object.assign({}, item, { description: bestsellerMatch.description });
-    }
-
-    return item;
-  }
-
-  async function fetchItem(resource, id) {
-    let item = null;
-
-    if (await checkServer()) {
+    if (resource === 'bouquets') {
       try {
-        const response = await getHttp().get(API_BASE + '/' + resource + '/' + id, {
-          timeout: 3000,
-        });
-        item = response.data;
+        const all = await fetchBouquetsFromApi();
+        return paginateItems(all, params);
       } catch (error) {
-        console.warn('json-server request failed, using local data', error);
+        console.warn('Bouquets API failed, using local data', error);
+        return fetchFromDbJson('bouquets', params);
       }
     }
 
-    if (!item) {
-      item = await findLocalItem(resource, id);
+    if (resource === 'bestsellers') {
+      try {
+        const all = await fetchBouquetsFromApi();
+        const limit = Number(params._limit) > 0 ? Number(params._limit) : 3;
+        const favorites = all.filter(function (item) {
+          return item.favorite;
+        });
+        const others = all.filter(function (item) {
+          return !item.favorite;
+        });
+        const data = favorites.concat(others).slice(0, limit);
+
+        return { data: data, total: data.length };
+      } catch (error) {
+        console.warn('Bestsellers API failed, using local data', error);
+        return fetchFromDbJson('bestsellers', params);
+      }
     }
 
+    return fetchFromDbJson(resource, params);
+  }
+
+  async function fetchItem(resource, id) {
+    if (resource === 'bouquets' || resource === 'bestsellers') {
+      try {
+        const http = getHttp();
+        if (!http) throw new Error('axios is not loaded');
+
+        const response = await http.get(BOUQUETS_API + '/' + id, { timeout: 20000 });
+        return mapBouquet(response.data);
+      } catch (error) {
+        console.warn('Bouquet API item failed, using local data', error);
+      }
+    }
+
+    const item = await findLocalItem(resource, id);
     if (!item) throw new Error('Item not found');
-    return enrichProduct(item, resource, id);
+    return item;
   }
 
   return {
