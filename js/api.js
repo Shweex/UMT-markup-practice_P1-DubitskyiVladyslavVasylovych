@@ -4,7 +4,25 @@ window.FloraAPI = (function () {
 
   let localDb = null;
   let bouquetsCache = null;
-  let localImageMap = null;
+
+  const LOCAL_IMAGE_MAP = (function buildLocalImageMap() {
+    const map = {
+      'floral melody': 'images/bouquet-peach-meadow.jpg',
+      'blush romance': 'images/bouquet-blush-romance.jpg',
+      'pastel garden': 'images/bouquet-pastel-garden.jpg',
+      'spring elegance': 'images/bouquet-spring-elegance-1.jpg',
+    };
+
+    const source = window.FloraDB;
+    if (!source) return map;
+
+    (source.bouquets || []).concat(source.bestsellers || []).forEach(function (entry) {
+      const key = (entry.name || entry.title || '').toLowerCase().trim();
+      if (key && entry.image) map[key] = entry.image;
+    });
+
+    return map;
+  })();
 
   function getHttp() {
     return window.axios;
@@ -14,25 +32,19 @@ window.FloraAPI = (function () {
     return !url || /gravatar\.com/i.test(url);
   }
 
-  async function getLocalImageMap() {
-    if (localImageMap) return localImageMap;
+  function resolveBouquetImage(item) {
+    const title = (item.title || item.name || '').toLowerCase().trim();
+    const remoteImage = item.photoURL || item.image;
 
-    const db = await getLocalDb();
-    const map = {};
+    if (isPlaceholderPhoto(remoteImage) && LOCAL_IMAGE_MAP[title]) {
+      return LOCAL_IMAGE_MAP[title];
+    }
 
-    (db.bouquets || []).concat(db.bestsellers || []).forEach(function (entry) {
-      const key = (entry.name || entry.title || '').toLowerCase().trim();
-      if (key && entry.image) map[key] = entry.image;
-    });
-
-    localImageMap = map;
-    return localImageMap;
+    return remoteImage;
   }
 
-  function mapBouquet(item, imageMap) {
-    const title = item.title || '';
-    const localImage = imageMap[(title || '').toLowerCase().trim()];
-    const image = isPlaceholderPhoto(item.photoURL) && localImage ? localImage : item.photoURL;
+  function mapBouquet(item) {
+    const title = item.title || item.name || '';
 
     return {
       id: item.id,
@@ -40,7 +52,7 @@ window.FloraAPI = (function () {
       title: title,
       description: item.description || '',
       price: Number(item.price),
-      image: image,
+      image: resolveBouquetImage(item),
       photoURL: item.photoURL,
       alt: (title || 'Bouquet') + ' bouquet',
       favorite: Boolean(item.favorite),
@@ -88,10 +100,7 @@ window.FloraAPI = (function () {
     if (!http) throw new Error('axios is not loaded');
 
     const response = await http.get(BOUQUETS_API, { timeout: 20000 });
-    const imageMap = await getLocalImageMap();
-    bouquetsCache = response.data.map(function (item) {
-      return mapBouquet(item, imageMap);
-    });
+    bouquetsCache = response.data.map(mapBouquet);
     return bouquetsCache;
   }
 
@@ -174,8 +183,7 @@ window.FloraAPI = (function () {
         if (!http) throw new Error('axios is not loaded');
 
         const response = await http.get(BOUQUETS_API + '/' + id, { timeout: 20000 });
-        const imageMap = await getLocalImageMap();
-        return mapBouquet(response.data, imageMap);
+        return mapBouquet(response.data);
       } catch (error) {
         console.warn('Bouquet API item failed, using local data', error);
       }
