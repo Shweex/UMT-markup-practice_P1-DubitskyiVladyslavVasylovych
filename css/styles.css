@@ -615,6 +615,10 @@ body.modal-open {
   margin-inline: auto;
 }
 
+.catalog__more[hidden] {
+  display: none !important;
+}
+
 .testimonials.section {
   padding: 64px 20px;
   background-color: var(--color-white);
