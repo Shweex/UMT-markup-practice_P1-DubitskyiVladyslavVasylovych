@@ -4,6 +4,9 @@
 
 **Сайт:** https://shweex.github.io/UMT-markup-practice_P1-DubitskyiVladyslavVasylovych/  
 **Репозиторій:** https://github.com/Shweex/UMT-markup-practice_P1-DubitskyiVladyslavVasylovych  
+**Backend:** https://github.com/Shweex/UMT-markup-practice_P1-DubitskyiVladyslavVasylovych-back  
+**API:** https://flora-api-qtqi.onrender.com/api/bouquets  
+**Swagger:** https://flora-api-qtqi.onrender.com/api-docs  
 **Макет:** https://www.figma.com/design/2Tj16H7IO7dq1ViTvIh57V/Flora?node-id=8211-116360
 
 ## Файли
