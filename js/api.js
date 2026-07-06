@@ -93,6 +93,41 @@ window.FloraAPI = (function () {
     throw new Error('No local data source available.');
   }
 
+  function mapLocalBouquet(item) {
+    const title = item.name || item.title || '';
+
+    return {
+      id: item.id,
+      name: title,
+      title: title,
+      description: item.description || '',
+      price: Number(item.price),
+      image: resolveBouquetImage(item),
+      photoURL: item.photoURL,
+      alt: item.alt || (title || 'Bouquet') + ' bouquet',
+      favorite: Boolean(item.favorite),
+    };
+  }
+
+  async function fetchBouquetsForCatalog() {
+    const apiBouquets = await fetchBouquetsFromApi();
+    const db = await getLocalDb();
+    const apiTitles = {};
+
+    apiBouquets.forEach(function (item) {
+      apiTitles[(item.title || '').toLowerCase().trim()] = true;
+    });
+
+    const extras = (db.bouquets || [])
+      .filter(function (item) {
+        const key = (item.name || item.title || '').toLowerCase().trim();
+        return key && !apiTitles[key];
+      })
+      .map(mapLocalBouquet);
+
+    return apiBouquets.concat(extras);
+  }
+
   async function fetchBouquetsFromApi() {
     if (bouquetsCache) return bouquetsCache;
 
@@ -146,7 +181,7 @@ window.FloraAPI = (function () {
 
     if (resource === 'bouquets') {
       try {
-        const all = await fetchBouquetsFromApi();
+        const all = await fetchBouquetsForCatalog();
         return paginateItems(all, params);
       } catch (error) {
         console.warn('Bouquets API failed, using local data', error);
