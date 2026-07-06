@@ -4,21 +4,45 @@ window.FloraAPI = (function () {
 
   let localDb = null;
   let bouquetsCache = null;
+  let localImageMap = null;
 
   function getHttp() {
     return window.axios;
   }
 
-  function mapBouquet(item) {
+  function isPlaceholderPhoto(url) {
+    return !url || /gravatar\.com/i.test(url);
+  }
+
+  async function getLocalImageMap() {
+    if (localImageMap) return localImageMap;
+
+    const db = await getLocalDb();
+    const map = {};
+
+    (db.bouquets || []).concat(db.bestsellers || []).forEach(function (entry) {
+      const key = (entry.name || entry.title || '').toLowerCase().trim();
+      if (key && entry.image) map[key] = entry.image;
+    });
+
+    localImageMap = map;
+    return localImageMap;
+  }
+
+  function mapBouquet(item, imageMap) {
+    const title = item.title || '';
+    const localImage = imageMap[(title || '').toLowerCase().trim()];
+    const image = isPlaceholderPhoto(item.photoURL) && localImage ? localImage : item.photoURL;
+
     return {
       id: item.id,
-      name: item.title,
-      title: item.title,
+      name: title,
+      title: title,
       description: item.description || '',
       price: Number(item.price),
-      image: item.photoURL,
+      image: image,
       photoURL: item.photoURL,
-      alt: (item.title || 'Bouquet') + ' bouquet',
+      alt: (title || 'Bouquet') + ' bouquet',
       favorite: Boolean(item.favorite),
     };
   }
@@ -64,7 +88,10 @@ window.FloraAPI = (function () {
     if (!http) throw new Error('axios is not loaded');
 
     const response = await http.get(BOUQUETS_API, { timeout: 20000 });
-    bouquetsCache = response.data.map(mapBouquet);
+    const imageMap = await getLocalImageMap();
+    bouquetsCache = response.data.map(function (item) {
+      return mapBouquet(item, imageMap);
+    });
     return bouquetsCache;
   }
 
@@ -147,7 +174,8 @@ window.FloraAPI = (function () {
         if (!http) throw new Error('axios is not loaded');
 
         const response = await http.get(BOUQUETS_API + '/' + id, { timeout: 20000 });
-        return mapBouquet(response.data);
+        const imageMap = await getLocalImageMap();
+        return mapBouquet(response.data, imageMap);
       } catch (error) {
         console.warn('Bouquet API item failed, using local data', error);
       }
